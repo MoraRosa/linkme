@@ -1,0 +1,42 @@
+{
+  "name": "Rosa Mora",
+  "firstName": "Rosa",
+  "lastName": "Mora",
+  "title": "Founder",
+  "org": "Peak Enterprise",
+  "tagline": "Software that helps non-technical founders run their business.",
+  "city": "Calgary",
+  "region": "Alberta",
+  "country": "Canada",
+  "photo": "",
+  "shareUrl": "",
+  "phone": "+1 587 435 3841",
+  "email": "info@peakenterprise.ca",
+  "links": [
+    {
+      "type": "web",
+      "label": "Peak Enterprise",
+      "url": "https://peakenterprise.ca/"
+    },
+    {
+      "type": "tiktok",
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@peak_enterprise"
+    },
+    {
+      "type": "portfolio",
+      "label": "Portfolio",
+      "url": "https://morarosa.github.io"
+    },
+    {
+      "type": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/hikmaha/"
+    },
+    {
+      "type": "github",
+      "label": "GitHub",
+      "url": "https://github.com/MoraRosa"
+    }
+  ]
+}

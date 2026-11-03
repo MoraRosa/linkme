@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rosa Mora · Peak Enterprise</title>
+  <meta name="description" content="Digital business card for Peak Enterprise. Save my contact details or tap a link.">
+  <meta name="theme-color" content="#f8f1e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#211d25" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Rosa Mora · Peak Enterprise">
+  <meta property="og:description" content="Save my contact details or tap a link.">
+  <meta property="og:type" content="profile">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Peak Card">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#links">Skip to links</a>
+
+  <main class="card" id="card" aria-busy="true">
+    <header class="head">
+      <div class="avatar" id="avatar" aria-hidden="true"></div>
+      <h1 id="name">Rosa Mora</h1>
+      <p class="role" id="role"></p>
+      <p class="tagline" id="tagline"></p>
+    </header>
+
+    <div class="actions">
+      <a class="btn btn--pink" id="save" href="contact.vcf" download="contact.vcf">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        Save contact
+      </a>
+      <button class="btn btn--sage" id="show-qr" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3v3h-3zM20 14v6h-6"/></svg>
+        Show QR
+      </button>
+    </div>
+
+    <ul class="links" id="links"></ul>
+
+    <p class="place" id="place"></p>
+  </main>
+
+  <dialog id="qr-dialog" aria-labelledby="qr-title">
+    <div class="qr-panel">
+      <h2 id="qr-title">Scan to get my card</h2>
+      <div class="qr-box" id="qr-box" role="img" aria-label="QR code that opens this card"></div>
+      <p class="qr-url" id="qr-url"></p>
+      <button class="btn btn--sage" id="qr-share" type="button">Share link</button>
+      <button class="btn btn--quiet" id="qr-close" type="button">Close</button>
+    </div>
+  </dialog>
+
+  <script src="vendor/qrcode.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
