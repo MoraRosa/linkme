@@ -119,6 +119,27 @@ body {
 }
 .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+/* Logo variant: the mascot stands on its own, no blob behind it. */
+.avatar--logo {
+  width: min(100%, 15.5rem);
+  height: auto;
+  min-height: 7.5rem;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+}
+.avatar--logo img {
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(3px 5px 0 rgb(113 78 82 / .16)) drop-shadow(5px 9px 9px rgb(91 61 66 / .14));
+}
+@media (prefers-color-scheme: dark) {
+  .avatar--logo img {
+    filter: drop-shadow(3px 5px 0 rgb(0 0 0 / .3)) drop-shadow(5px 9px 9px rgb(0 0 0 / .22));
+  }
+}
+
 h1 {
   margin: 0;
   font-size: clamp(2.2rem, 11vw, 2.9rem);
@@ -168,10 +189,48 @@ h1 {
   outline-offset: 3px;
 }
 
+/* ---------- Details switch ---------- */
+.detail-toggle {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  margin: 1.5rem .2rem 0;
+  padding: 0 .2rem;
+  font-weight: 800; color: var(--ink-soft);
+}
+
+.switch {
+  position: relative; flex: none;
+  width: 3.6rem; height: 2.1rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--line);
+  box-shadow: var(--clay-pressed);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 200ms;
+}
+/* Invisible padding so the tap target is at least 44px tall. */
+.switch::after { content: ""; position: absolute; inset: -.35rem -.2rem; }
+.switch-thumb {
+  position: absolute; top: .18rem; left: .2rem;
+  width: 1.55rem; height: 1.55rem;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--clay-small);
+  transition: transform 220ms var(--ease-squish);
+}
+.switch[aria-checked="true"] { background: var(--sage); border-color: var(--sage-edge); }
+.switch[aria-checked="true"] .switch-thumb { transform: translateX(1.5rem); }
+.switch:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+/* Hidden state: rows keep working, the numbers and addresses just aren't printed. */
+.card[data-details="hide"] .link-value { display: none; }
+.card[data-details="hide"] .link { min-height: 3.25rem; }
+
 /* ---------- Links ---------- */
 .links {
   list-style: none;
-  margin: 1.7rem .2rem 0;
+  margin: .9rem .2rem 0;
   padding: 0;
   display: grid;
   gap: .85rem;
@@ -243,7 +302,7 @@ dialog[open] { animation: pop 320ms var(--ease-squish); }
   border: 1px solid var(--line);
   box-shadow: var(--clay-small);
 }
-.qr-box svg { display: block; width: 100%; height: 100%; }
+.qr-box svg, .qr-box img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .qr-url { margin: 0; max-width: 100%; overflow-wrap: anywhere; color: var(--muted); font-size: .85rem; }
 .qr-panel .btn { width: 100%; }
 
@@ -258,7 +317,7 @@ dialog[open] { animation: pop 320ms var(--ease-squish); }
 }
 @media (prefers-reduced-motion: reduce) {
   .avatar, dialog[open] { animation: none; }
-  .btn, .link { transition: none; }
+  .btn, .link, .switch, .switch-thumb { transition: none; }
   .btn:hover, .link:hover { transform: none; }
 }
 

@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Rosa Mora · Peak Enterprise</title>
+  <title>Hikmah Adepoju · Peak Enterprise</title>
   <meta name="description" content="Digital business card for Peak Enterprise. Save my contact details or tap a link.">
   <meta name="theme-color" content="#f8f1e9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#211d25" media="(prefers-color-scheme: dark)">
-  <meta property="og:title" content="Rosa Mora · Peak Enterprise">
+  <meta property="og:title" content="Hikmah Adepoju · Peak Enterprise">
   <meta property="og:description" content="Save my contact details or tap a link.">
   <meta property="og:type" content="profile">
   <link rel="manifest" href="manifest.webmanifest">
@@ -15,16 +15,16 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Peak Card">
+  <meta name="apple-mobile-web-app-title" content="LinkMe">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip" href="#links">Skip to links</a>
 
-  <main class="card" id="card" aria-busy="true">
+  <main class="card" id="card" aria-busy="true" data-details="show">
     <header class="head">
       <div class="avatar" id="avatar" aria-hidden="true"></div>
-      <h1 id="name">Rosa Mora</h1>
+      <h1 id="name">Hikmah Adepoju</h1>
       <p class="role" id="role"></p>
       <p class="tagline" id="tagline"></p>
     </header>
@@ -37,6 +37,13 @@
       <button class="btn btn--sage" id="show-qr" type="button">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3v3h-3zM20 14v6h-6"/></svg>
         Show QR
+      </button>
+    </div>
+
+    <div class="detail-toggle">
+      <span id="details-label">Show details</span>
+      <button class="switch" id="details-switch" type="button" role="switch" aria-checked="true" aria-labelledby="details-label">
+        <span class="switch-thumb" aria-hidden="true"></span>
       </button>
     </div>
 

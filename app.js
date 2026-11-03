@@ -45,7 +45,14 @@
     $("place").textContent = [c.city, c.region].filter(Boolean).join(", ");
 
     const avatar = $("avatar");
-    if (c.photo) {
+    if (c.logo) {
+      avatar.classList.add("avatar--logo");
+      const img = new Image();
+      img.alt = c.org ? `${c.org} mascot` : "";
+      img.decoding = "async";
+      img.src = c.logo;
+      avatar.append(img);
+    } else if (c.photo) {
       const img = new Image();
       img.alt = "";
       img.src = c.photo;
@@ -64,6 +71,28 @@
     }
 
     $("card").removeAttribute("aria-busy");
+  }
+
+  // ---------- Show / hide details ----------
+  // c.showDetails is the default everyone sees. The switch overrides it on this device only.
+  const KEY = "linkme:details";
+  function readPref() { try { return localStorage.getItem(KEY); } catch (_) { return null; } }
+  function writePref(v) { try { localStorage.setItem(KEY, v); } catch (_) { /* private mode etc. */ } }
+
+  function setupDetails(c) {
+    const card = $("card");
+    const sw = $("details-switch");
+    const apply = (show) => {
+      card.dataset.details = show ? "show" : "hide";
+      sw.setAttribute("aria-checked", String(show));
+    };
+    const saved = readPref();
+    apply(saved === null ? c.showDetails !== false : saved === "show");
+    sw.addEventListener("click", () => {
+      const show = sw.getAttribute("aria-checked") !== "true";
+      apply(show);
+      writePref(show ? "show" : "hide");
+    });
   }
 
   // ---------- QR ----------
@@ -93,8 +122,18 @@
   function setupQr(c) {
     const dialog = $("qr-dialog");
     const url = cardUrl(c);
+    const generated = () => { $("qr-box").innerHTML = qrSvg(url); };
+    if (c.qrImage) fetch(c.qrImage).catch(() => {});   // warms the offline cache so the designed QR works with no signal
     $("show-qr").addEventListener("click", () => {
-      $("qr-box").innerHTML = qrSvg(url);
+      if (c.qrImage) {
+        const img = new Image();
+        img.alt = "";
+        img.onerror = generated;           // image missing or offline-miss: fall back to the generated code
+        img.src = c.qrImage;
+        $("qr-box").replaceChildren(img);
+      } else {
+        generated();
+      }
       $("qr-url").textContent = pretty(url);
       $("qr-share").textContent = typeof navigator.share === "function" ? "Share link" : "Copy link";
       if (typeof dialog.showModal === "function") dialog.showModal();
@@ -120,7 +159,7 @@
   // ---------- Boot ----------
   fetch("card.json", { cache: "no-cache" })
     .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then((c) => { render(c); setupQr(c); $("save").download = `${c.name.replace(/\s+/g, "-")}.vcf`; })
+    .then((c) => { render(c); setupDetails(c); setupQr(c); $("save").download = `${c.name.replace(/\s+/g, "-")}.vcf`; })
     .catch(() => {
       $("role").textContent = "Couldn't load the card. Check your connection and reload.";
       $("card").removeAttribute("aria-busy");

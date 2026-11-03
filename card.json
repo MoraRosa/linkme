@@ -1,10 +1,10 @@
 {
-  "name": "Rosa Mora",
-  "firstName": "Rosa",
-  "lastName": "Mora",
+  "name": "Hikmah Adepoju",
+  "firstName": "Hikmah",
+  "lastName": "Adepoju",
   "title": "Founder",
   "org": "Peak Enterprise",
-  "tagline": "Software that helps non-technical founders run their business.",
+  "tagline": "Run your business. Stop running spreadsheets.",
   "city": "Calgary",
   "region": "Alberta",
   "country": "Canada",
@@ -38,5 +38,8 @@
       "label": "GitHub",
       "url": "https://github.com/MoraRosa"
     }
-  ]
+  ],
+  "logo": "logo.webp",
+  "showDetails": true,
+  "qrImage": ""
 }

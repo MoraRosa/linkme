@@ -1,9 +1,9 @@
-# Peak card
+# Peak LinkMe
 
 A digital business card. One page, no build step, works offline once opened.
 
 ## Make it yours
-1. Open `card.json` and fill in `phone`, `email`, and the TikTok `url`. Anything left empty is hidden.
+1. Open `card.json` and edit your details. Anything left empty is hidden.
 2. Run `node build-vcard.mjs`. This regenerates `contact.vcf`, the file people download.
 3. Commit and push.
 
@@ -22,6 +22,8 @@ Tap the icon, tap **Show QR**, and let them scan it. The QR always points at the
 so editing `card.json` later never breaks cards you've already handed out.
 
 ## Notes
+- `showDetails` sets whether phone/email/link addresses are printed on the page by default. The switch on the page overrides it on that device only; the buttons work either way and the saved contact always has everything.
+- `logo` is the mascot image shown at the top (leave it empty to fall back to initials).
 - `shareUrl` in `card.json` overrides the URL used in the QR (handy when testing locally).
 - `photo` accepts a path such as `me.jpg` (about 400px square, under 100 KB). It replaces the initials badge
   and is embedded in the downloaded contact, so you show up with your face in people's phones.
