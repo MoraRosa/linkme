@@ -4,13 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Hikmah Adepoju · Peak Enterprise</title>
-  <meta name="description" content="Digital business card for Peak Enterprise. Save my contact details or tap a link.">
+  <meta name="description" content="Hikmah Adepoju, Founder of Peak Enterprise. Save my contact details or tap a link.">
   <meta name="theme-color" content="#f8f1e9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#211d25" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Hikmah Adepoju · Peak Enterprise">
-  <meta property="og:description" content="Save my contact details or tap a link.">
-  <meta property="og:type" content="profile">
+  <meta property="og:description" content="Run your business. Stop running spreadsheets.">
+  <meta property="og:url" content="https://morarosa.github.io/linkme/">
+  <meta property="og:image" content="https://morarosa.github.io/linkme/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pippa, the Peak Enterprise mascot, piloting a grey clay airplane">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hikmah Adepoju · Peak Enterprise">
+  <meta name="twitter:description" content="Run your business. Stop running spreadsheets.">
+  <meta name="twitter:image" content="https://morarosa.github.io/linkme/og-image.jpg">
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,9 +51,10 @@
     </div>
 
     <div class="detail-toggle">
-      <span id="details-label">Show details</span>
-      <button class="switch" id="details-switch" type="button" role="switch" aria-checked="true" aria-labelledby="details-label">
-        <span class="switch-thumb" aria-hidden="true"></span>
+      <button class="clay-toggle" id="details-switch" type="button" role="switch" aria-checked="true" aria-labelledby="details-label">
+        <span class="clay-toggle-track" aria-hidden="true"><span class="clay-toggle-thumb"></span></span>
+        <span class="clay-toggle-label" id="details-label">Show details</span>
+        <span class="clay-toggle-status" id="details-status" aria-hidden="true">On</span>
       </button>
     </div>
 

@@ -1,6 +1,6 @@
 // Network-first: you always get your latest edits when online,
 // and the card still opens when there's no signal.
-const CACHE = "peak-card-v5";
+const CACHE = "peak-card-v6";
 const SHELL = [
   "./", "index.html", "styles.css", "app.js", "card.json", "contact.vcf",
   "vendor/qrcode.js", "manifest.webmanifest",
@@ -28,6 +28,6 @@ self.addEventListener("fetch", (e) => {
         if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
         return res;
       })
-      .catch(() => caches.match(req).then((hit) => hit || caches.match("index.html")))
+      .catch(() => caches.match(req, { ignoreSearch: true }).then((hit) => hit || caches.match("index.html")))
   );
 });

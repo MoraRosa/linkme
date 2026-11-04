@@ -26,7 +26,8 @@
     {
       "type": "portfolio",
       "label": "Portfolio",
-      "url": "https://morarosa.github.io"
+      "url": "https://morarosa.github.io",
+      "hidden": true
     },
     {
       "type": "linkedin",
@@ -36,7 +37,8 @@
     {
       "type": "github",
       "label": "GitHub",
-      "url": "https://github.com/MoraRosa"
+      "url": "https://github.com/MoraRosa",
+      "hidden": true
     }
   ],
   "logo": "logo.webp",

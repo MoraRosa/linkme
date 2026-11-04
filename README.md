@@ -22,6 +22,8 @@ Tap the icon, tap **Show QR**, and let them scan it. The QR always points at the
 so editing `card.json` later never breaks cards you've already handed out.
 
 ## Notes
+- To hide a link without deleting it, add `"hidden": true` to its entry in `card.json` (remove that line to bring it back). It's skipped on the page and in the saved contact. GitHub and Portfolio are parked this way right now.
+- Stuck on an old version, or want a clean slate on one device? Open your card URL with `?reset` on the end (for example `https://you.github.io/linkme/?reset`). It clears the saved offline copy and reloads fresh. It can't uninstall the app; do that from your phone's app list.
 - `showDetails` sets whether phone/email/link addresses are printed on the page by default. The switch on the page overrides it on that device only; the buttons work either way and the saved contact always has everything.
 - `logo` is the mascot image shown at the top (leave it empty to fall back to initials).
 - `shareUrl` in `card.json` overrides the URL used in the QR (handy when testing locally).

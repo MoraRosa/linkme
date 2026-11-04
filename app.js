@@ -66,7 +66,7 @@
     if (c.phone) list.append(row({ type: "phone", label: "Call", value: c.phone, href: `tel:${c.phone.replace(/[^\d+]/g, "")}` }));
     if (c.email) list.append(row({ type: "email", label: "Email", value: c.email, href: `mailto:${c.email}` }));
     for (const l of c.links || []) {
-      if (!l.url) continue;
+      if (!l.url || l.hidden) continue;
       list.append(row({ type: l.type, label: l.label, value: pretty(l.url), href: l.url, external: true }));
     }
 
@@ -82,9 +82,11 @@
   function setupDetails(c) {
     const card = $("card");
     const sw = $("details-switch");
+    const status = $("details-status");
     const apply = (show) => {
       card.dataset.details = show ? "show" : "hide";
       sw.setAttribute("aria-checked", String(show));
+      status.textContent = show ? "On" : "Off";
     };
     const saved = readPref();
     apply(saved === null ? c.showDetails !== false : saved === "show");
@@ -154,6 +156,19 @@
     });
     // Tap outside the panel to close.
     dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
+  }
+
+  // ---------- One-time reset: open the page with ?reset on the end ----------
+  // Clears the saved offline copy, the service worker and the show/hide choice on this device,
+  // then reloads fresh. It can't uninstall the app itself (only you can do that).
+  if (/[?&]reset(=|&|$)/.test(location.search)) {
+    document.body.textContent = "Clearing the saved copy...";
+    const tasks = [];
+    if ("serviceWorker" in navigator) tasks.push(navigator.serviceWorker.getRegistrations().then((rs) => Promise.all(rs.map((r) => r.unregister()))));
+    if ("caches" in window) tasks.push(caches.keys().then((ks) => Promise.all(ks.map((k) => caches.delete(k)))));
+    try { localStorage.removeItem(KEY); } catch (_) { /* ignore */ }
+    Promise.allSettled(tasks).then(() => location.replace(location.pathname));
+    return;
   }
 
   // ---------- Boot ----------

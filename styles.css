@@ -32,6 +32,10 @@
 
   --backdrop: rgb(38 27 35 / .44);
 
+  --toggle-track-bg: #e9ddda;  --toggle-track-border: #cbb7b6;
+  --toggle-thumb-bg: #fffaf5;  --toggle-thumb-edge: #cfaeb8;
+  --toggle-on-bg: #c4ddc1;     --toggle-on-border: #8eb692;  --toggle-on-thumb-bg: #fffdf9;
+
   --font: ui-rounded, "SF Pro Rounded", "Trebuchet MS", system-ui, -apple-system, sans-serif;
   --ease-squish: cubic-bezier(.34, 1.56, .64, 1);
 }
@@ -61,6 +65,10 @@
     --clay-small: 3px 4px 0 rgb(0 0 0 / .25), 5px 7px 10px rgb(0 0 0 / .18),
       inset 2px 2px 4px rgb(255 255 255 / .08), inset -3px -3px 5px rgb(0 0 0 / .16);
     --clay-pressed: inset 4px 5px 7px rgb(0 0 0 / .28), inset -2px -2px 4px rgb(255 255 255 / .08);
+
+    --toggle-track-bg: #39323f;  --toggle-track-border: #675865;
+    --toggle-thumb-bg: #f8edf3;  --toggle-thumb-edge: #786873;
+    --toggle-on-bg: #496b50;     --toggle-on-border: #739f79;  --toggle-on-thumb-bg: #f8edf3;
     --clay-pink: 4px 5px 0 var(--pink-edge), 6px 8px 11px rgb(0 0 0 / .2),
       inset 3px 3px 6px rgb(255 255 255 / .13), inset -4px -4px 7px rgb(0 0 0 / .22);
     --clay-sage: 4px 5px 0 var(--sage-edge), 6px 8px 11px rgb(0 0 0 / .2),
@@ -189,39 +197,55 @@ h1 {
   outline-offset: 3px;
 }
 
-/* ---------- Details switch ---------- */
-.detail-toggle {
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  margin: 1.5rem .2rem 0;
-  padding: 0 .2rem;
-  font-weight: 800; color: var(--ink-soft);
-}
+/* ---------- Clay toggle (same material as the Soft Matter reference) ----------
+   Off: the track is sunken. On: sage track, raised. The thumb is raised in both. */
+.detail-toggle { margin: 1.5rem .2rem 0; }
 
-.switch {
-  position: relative; flex: none;
-  width: 3.6rem; height: 2.1rem;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--line);
-  box-shadow: var(--clay-pressed);
+.clay-toggle {
+  display: flex; align-items: center; gap: .75rem;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0 .2rem;
+  border: 0; background: transparent;
+  color: var(--ink);
+  font: inherit; font-weight: 800;
+  text-align: left;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: background 200ms;
 }
-/* Invisible padding so the tap target is at least 44px tall. */
-.switch::after { content: ""; position: absolute; inset: -.35rem -.2rem; }
-.switch-thumb {
-  position: absolute; top: .18rem; left: .2rem;
-  width: 1.55rem; height: 1.55rem;
+.clay-toggle-track {
+  position: relative; flex: none;
+  display: inline-flex; align-items: center;
+  width: 3.9rem; height: 2.25rem;
+  padding: .25rem;
+  border: 1px solid var(--toggle-track-border);
+  border-radius: 999px;
+  background: var(--toggle-track-bg);
+  box-shadow: var(--clay-pressed);
+  transition: background 140ms, border-color 140ms, box-shadow 140ms;
+}
+.clay-toggle-thumb {
+  display: block;
+  width: calc(2.25rem - .5rem - 2px); height: calc(2.25rem - .5rem - 2px);
+  border: 1px solid var(--toggle-thumb-edge);
   border-radius: 50%;
-  background: var(--surface);
+  background: var(--toggle-thumb-bg);
   box-shadow: var(--clay-small);
-  transition: transform 220ms var(--ease-squish);
+  transition: transform 140ms var(--ease-squish), background 140ms, box-shadow 140ms;
 }
-.switch[aria-checked="true"] { background: var(--sage); border-color: var(--sage-edge); }
-.switch[aria-checked="true"] .switch-thumb { transform: translateX(1.5rem); }
-.switch:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.clay-toggle[aria-checked="true"] .clay-toggle-track {
+  background: var(--toggle-on-bg);
+  border-color: var(--toggle-on-border);
+  box-shadow: var(--clay-small);
+}
+.clay-toggle[aria-checked="true"] .clay-toggle-thumb {
+  background: var(--toggle-on-thumb-bg);
+  transform: translateX(calc(3.9rem - 2.25rem));
+}
+.clay-toggle-label { flex: 1; }
+.clay-toggle-status { min-width: 2.2rem; text-align: right; color: var(--muted); font-size: .9rem; font-weight: 900; }
+.clay-toggle[aria-checked="true"] .clay-toggle-status { color: var(--sage-deep); }
+.clay-toggle:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; border-radius: .6rem; }
 
 /* Hidden state: rows keep working, the numbers and addresses just aren't printed. */
 .card[data-details="hide"] .link-value { display: none; }
@@ -317,7 +341,7 @@ dialog[open] { animation: pop 320ms var(--ease-squish); }
 }
 @media (prefers-reduced-motion: reduce) {
   .avatar, dialog[open] { animation: none; }
-  .btn, .link, .switch, .switch-thumb { transition: none; }
+  .btn, .link, .clay-toggle-track, .clay-toggle-thumb { transition: none; }
   .btn:hover, .link:hover { transform: none; }
 }
 

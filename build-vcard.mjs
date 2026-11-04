@@ -38,7 +38,7 @@ if (c.photo && !/^https?:/i.test(c.photo)) {
 // Labeled URLs: the "itemN." grouping makes iOS and macOS Contacts show the label.
 let n = 0;
 for (const link of c.links || []) {
-  if (!link.url) continue;
+  if (!link.url || link.hidden) continue;
   n += 1;
   L.push(`item${n}.URL:${link.url}`);
   L.push(`item${n}.X-ABLabel:${esc(link.label)}`);
